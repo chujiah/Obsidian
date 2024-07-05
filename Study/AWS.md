@@ -212,7 +212,7 @@ VPC를 인터넷에 연결하는 가상 라우터, 퍼블릭 서브넷에 있는
 Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
 ````
 
-### 🔍 AMI
+### 🔍 1. AMI
 
 ![](https://i.imgur.com/GgPqFRC.png)
 
@@ -222,7 +222,7 @@ Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
 Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS, EBS 등 세팅 정보를 저장한 단위
 ````
 
-### 🔍 Instance Types
+### 🔍 2. Instance Types
 
 ![](https://i.imgur.com/PbBl4bd.png)
 
@@ -283,11 +283,33 @@ e: 추가 스토리지 또는 메모리
 z: 고주파
 ````
 
-### 🔍 Key pair
+### 🔍 3. Key pair
 
 ![](https://i.imgur.com/mkpULvS.png)
 
-### 🔍 EBS
+````
+❓
+
+인스턴스 접속을 위한 물리키로 외부에서 EC2를 접속할 때 필요한 키페어
+재발급이 불가하기 때문에 잘 저장해야 함!
+````
+
+### 🔍 4. 보안 그룹
+
+![](https://i.imgur.com/e4VGioq.png)
+![](https://i.imgur.com/Ua0ptFt.png)
+
+
+````
+❓
+
+네트워크를 통해 인스턴스의 접속 허용 범위를 설정
+
+SSH 접속 22번 포트 사용 0.0.0.0/0 (모든 ip) 접속 가능
+HTTP 접속 80 포트 사용 0.0.0.0/0 (모든 ip) 접속 가능
+````
+
+### 🔍 5. EBS
 
 ![](https://i.imgur.com/qBFCJnu.png)
 
@@ -331,3 +353,22 @@ EBS로 생성한 디스크 저장 단위
 IOPS 수치가 높을수록 데이터 통신이 빠름
 ````
 
+# 📎 탄력적 IP
+
+````
+❓
+
+Elastic IP,
+인터넷을 통해 접속이 가능한 공인 IP 주소 할당
+인스턴스의 public IP가 고정된 IP 주소가 아니기 때문에 인스턴스를 중지하고 실행할 시 IP주소가 변경되어 버림! 그래서 고정적인 IP 주소를 위해 탄력적 IP 할당 
+````
+
+![](https://i.imgur.com/0mr77Wb.png)
+
+# 📎 NAT Gateway
+
+````
+
+````
+
+![](https://i.imgur.com/nudhD2v.png)
