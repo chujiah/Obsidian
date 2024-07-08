@@ -219,8 +219,17 @@ Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
 ````
 ❓
 
-Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS, EBS 등 세팅 정보를 저장한 단위
+Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS 및 소프트웨어 등 세팅 정보를 저장한 단위
 ````
+
+💡 ***스냅샷과 AMI의 차이는?
+
+ AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 <span style="background-color:#fff5b1">
+모든 EBS Volume을 백업</span>하는 것
+ 스냅샷의 경우는 <span style="background-color:#fff5b1">각각의 EBS Volume을 백업</span>하는 것
+
+	  AMI : 인스턴스를 백업
+	  스냅샷 : 데이터만 백업
 
 ### 🔍 2. Instance Types
 
@@ -360,7 +369,8 @@ IOPS 수치가 높을수록 데이터 통신이 빠름
 
 Elastic IP,
 인터넷을 통해 접속이 가능한 공인 IP 주소 할당
-인스턴스의 public IP가 고정된 IP 주소가 아니기 때문에 인스턴스를 중지하고 실행할 시 IP주소가 변경되어 버림! 그래서 고정적인 IP 주소를 위해 탄력적 IP 할당 
+인스턴스의 public IP가 고정된 IP 주소가 아니기 때문에 인스턴스를 중지하고 실행할 시 IP주소가 변경되어 버림! 
+그래서 고정적인 IP 주소를 위해 탄력적 IP 할당 
 ````
 
 ![](https://i.imgur.com/0mr77Wb.png)
@@ -372,3 +382,5 @@ Elastic IP,
 ````
 
 ![](https://i.imgur.com/nudhD2v.png)
+
+
