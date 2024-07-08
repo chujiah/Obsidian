@@ -224,11 +224,14 @@ Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS 및 소프트�
 
 💡 ***스냅샷과 AMI의 차이는?
 
-AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 ==모든 EBS Volume을 백업==하는 것
-스냅샷의 경우는 ==각각의 EBS Volume==을 백업하는 것
+````
+AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 모든 EBS Volume을 백업하는 것
+
+스냅샷의 경우는 각각의 EBS Volume을 백업하는 것
 
 	  AMI : 인스턴스를 백업
 	  스냅샷 : 데이터만 백업
+````
 
 ### 🔍 2. Instance Types
 
@@ -377,9 +380,26 @@ Elastic IP,
 # 📎 NAT Gateway
 
 ````
+❓
 
+Network Address Translation (네트워크 주소 변환),
+사설 IP를 하나의 공인 IP로 변경하여 외부에 인터넷 통신이 가능하도록 만드는 것
+
+private 서브넷이 내부에서 외부로 통신 (아웃바운드) 할 수 있도록 public 서브넷에 추가하여 private 서브넷의 라우팅을 추가해줌
 ````
 
 ![](https://i.imgur.com/nudhD2v.png)
 
+````
+📎 
+
+NAT 게이트웨이에 탄력적IP 주소 할당하여 공인 IP를 가지도록 함
+````
+
+💡 ***Bastion host와 NAT Gateway
+
+```` 
+NAT Gateway는 내부 -> 외부 접근이 가능하다면 Bastion Host는 내부 <-> 외부 접근이 가능함
+Bastion Host도 NAT Gateway와 마찬가지로 public 서브넷에 위치함
+````
 
