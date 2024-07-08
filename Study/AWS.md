@@ -224,8 +224,8 @@ Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS 및 소프트�
 
 💡 ***스냅샷과 AMI의 차이는?
 
- AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 ==모든 EBS Volume을 백업==하는 것
-스냅샷의 경우는 ==각각의 EBS Volume을 백업==하는 것
+ AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 <mark>모든 EBS Volume을 백업</mark>하는 것
+스냅샷의 경우는 <mark>각각의 EBS Volume을 백업</mark>하는 것
 
 	  AMI : 인스턴스를 백업
 	  스냅샷 : 데이터만 백업
