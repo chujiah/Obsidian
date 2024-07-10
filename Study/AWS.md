@@ -70,8 +70,6 @@ Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 
 
 # 📎 서브넷
 
-  
-  
 
 ````
 
@@ -197,7 +195,7 @@ Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
 Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS 및 소프트웨어 등 세팅 정보를 저장한 단위
 ````
 
-💡 ***스냅샷과 AMI의 차이는?
+💡 ***스냅샷과 AMI의 차이는?***
 
 ````
 AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 모든 EBS Volume을 백업하는 것
@@ -371,7 +369,7 @@ private 서브넷이 내부에서 외부로 통신 (아웃바운드) 할 수 있
 NAT 게이트웨이에 탄력적IP 주소 할당하여 공인 IP를 가지도록 함
 ````
 
-💡 ***Bastion host와 NAT Gateway
+💡 ***Bastion host와 NAT Gateway***
 
 ```` 
 NAT Gateway는 내부 -> 외부 접근이 가능하다면 Bastion Host는 내부 <-> 외부 접근이 가능함
@@ -387,7 +385,7 @@ Amazon Elastic Kubernetes Service,
 AWS에서 제공하는 kubernetes 관리형 실행 서비스
 ````
 
-💡 ***EKS는 AWS가 관리하는 Control Plane과 사용자가 관리하는 Data Plane으로 나뉜다.
+💡 ***EKS는 AWS가 관리하는 Control Plane과 사용자가 관리하는 Data Plane으로 나뉜다.***
 
 ### 🔍 Control Plane
 
