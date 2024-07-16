@@ -385,9 +385,7 @@ Amazon Elastic Kubernetes Service,
 AWS에서 제공하는 kubernetes 관리형 실행 서비스
 ````
 
-💡 ***EKS는 AWS가 관리하는 Control Plane과 사용자가 관리하는 Data Plane으로 나뉜다.***
 
-### 🔍 Control Plane
 
 
 
