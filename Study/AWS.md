@@ -1,6 +1,6 @@
 # AWS
 
-// 구성도 추가 예정
+![](https://i.imgur.com/CwAMqZh.png)
 
 # 📎 **계정 생성**
 
@@ -384,7 +384,6 @@ Bastion Host도 NAT Gateway와 마찬가지로 public 서브넷에 위치함
 Amazon Elastic Kubernetes Service,
 AWS에서 제공하는 kubernetes 관리형 실행 서비스
 ````
-
 
 
 
