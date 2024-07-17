@@ -25,7 +25,7 @@ App의 독립적인 실행환경을 만들어 주는 것
 
 ### 쿠버네티스의 구성
 
-![](https://i.imgur.com/tMA0SG0.png)
+![](https://i.imgur.com/ZD99nQM.png)
 
 ⬛ Control Plane
 

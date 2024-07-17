@@ -2,59 +2,29 @@
 
 ![](https://i.imgur.com/CwAMqZh.png)
 
-# 📎 **계정 생성**
-
-  
+# **계정 생성**
 
 🙋‍♀️ Root 계정
-
-  
-
 AWS 계정 내 모든 AWS 서비스 및 리소스에 접근 가능
 
-  
-
 👭 IAM 계정
-
-  
-
 (AWS Identity and Access Management)
-
-  
-
 Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 사용
 
-
-
-````
-❓ 
-
 ***IAM Identity Center 사용자***
-
   - IAM Identity Center를 통해 생성되고 관리되는 사용자
-
   - 중앙 집중식 인증 및 권한 부여를 제공하며, 여러 AWS 계정 및 애플리케이션에 걸쳐 SSO 기능 제공
 
 ***IAM 기본 사용자***
-
    - AWS 계정 내의 직접 생성되고 관리되는 사용자
-
    - AWS 리소스에 대한 액세스 관리
 
-***SSO(Single Sign-On)***은 사용자가 한번의 로그인으로 여러 시스템이나 애플리케이션에 접근할 수 있게 해주는 인증 방법
-````
+**SSO(Single Sign-On)**은 사용자가 한번의 로그인으로 여러 시스템이나 애플리케이션에 접근할 수 있게 해주는 인증 방법
 
-  
-
-# 📎 **VPC (Virtual Private Cloud)**
-
-
-````
-❓ 
+# **VPC (Virtual Private Cloud)**
 
 클라우드 환경 AWS 계정 사용자 전용의 가상 네트워크,
 서브넷,라우팅 테이블 등 네트워킹 환경을 사용자가 구성 및 제어 가능
-````
 
 
 ![](https://i.imgur.com/Y5bWfxH.png)
@@ -66,14 +36,8 @@ Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 
 이름 태그 (jachu-vpc) / IPv4 CIDR (10.0.0.0/16) 입력 후 생성
 ````
 
+# 서브넷
 
-
-# 📎 서브넷
-
-
-````
-
-❓ 
 
 큰 네트워크를 더 작은 네트워크 단위로 분할 하는 것
 
@@ -81,9 +45,7 @@ Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 
 
 - **프라이빗 서브넷** : 외부 인터넷과 통신이 불가능한 서브넷 (ex. 데이터베이스 서버) [아웃바운드]
 
-````
 
-  
 
 ![](https://i.imgur.com/NtCtqOR.png)
 
@@ -91,7 +53,6 @@ Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 
 ![](https://i.imgur.com/1Encb0k.png)
 
   
-
 ````
 
 📎 
@@ -102,39 +63,22 @@ Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 
 
   
 퍼블릭 서브넷일 경우엔 IPv4 주소 자동 할당 활성화 필수
+````
 
-  
 ⭐ **가용 영역 (AZ, Availablity Zone)**
 
 이중화와 비슷한 개념으로 AWS 리전 내에서 물리적으로 분리하여 장애 복구 및 지속적인 가용성을 보장
 
-  
-+------------------------------------------------------------+
-|        AZ         |          서브넷           | IPv4 CIDR   |
---------------------------------------------------------------
-| ap-northeast-2a   | jachu-subnet-public-az1  | 10.0.1.0/24 |
---------------------------------------------------------------
-| ap-northeast-2a   | jachu-subnet-private-az1 | 10.0.3.0/24 |
---------------------------------------------------------------
-| ap-northeast-2c   | jachu-subnet-public-az2  | 10.0.2.0/24 |
---------------------------------------------------------------
-| ap-northeast-2c   | jachu-subnet-private-az2 | 10.0.4.0/24 |
-+------------------------------------------------------------+
-````
-
-  
+| AZ              | 서브넷                      | IPv4 CIDR                                     |
+| --------------- | ------------------------ | --------------------------------------------- |
+| ap-northeast-2a | jachu-subnet-public-az1  | 10.0.1.0/24                                   |
+| ap-northeast-2a | jachu-subnet-private-az1 | 10.0.3.0/24                                   |
+| ap-northeast-2c | jachu-subnet-public-az2  | 10.0.2.0/24                                   |
+| ap-northeast-2c | jachu-subnet-private-az2 | 10.0.4.0/24                                   |
 
 # 📎 라우팅 테이블
 
-  
-  
-
-````
-❓ 
-
 VPC 내의 네트워크 트래픽의 경로를 정의
-````
-
 
 ![](https://i.imgur.com/2u9Gp95.png)
 
@@ -157,12 +101,12 @@ VPC 내의 네트워크 트래픽의 경로를 정의
 0.0.0.0/0 은 10.0.0.0/16 대역을 제외한 모든 대역은 인터넷게이트웨이를 통해 바깥으로 내보내줌
 
 반대로 10.0.0.0/16 대역은 로컬에서 찾음
+````
 
-  
 ⭐ **인터넷게이트웨이**
 
-VPC를 인터넷에 연결하는 가상 라우터, 퍼블릭 서브넷에 있는 인스턴스가 인터넷으로 나가거나 들어오는 트래픽 처리
-````
+VPC를 인터넷에 연결하는 가상 라우터,
+퍼블릭 서브넷에 있는 인스턴스가 인터넷으로 나가거나 들어오는 트래픽 처리
 
 
 ![](https://i.imgur.com/yDhEEY4.png)
@@ -178,13 +122,7 @@ VPC를 인터넷에 연결하는 가상 라우터, 퍼블릭 서브넷에 있는
 
 # 📎 EC2
 
-  
-````
-❓
-
 Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
-````
-
 ### 🔍 1. AMI
 
 ![](https://i.imgur.com/GgPqFRC.png)
@@ -214,17 +152,13 @@ AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 모든 E
 
 출처: [https://jaychapel.medium.com/ec2-instance-types-comparison-and-how-to-remember-them-bbb96b578aea](https://jaychapel.medium.com/ec2-instance-types-comparison-and-how-to-remember-them-bbb96b578aea)
 
-````
-📎
-
 **EC2 인스턴스**
 
 EC2에서 제공하는 가상 서버로 필요에 맞게 인스턴스 유형 및 운영체제를 선택하여 구성 가능
 
-  
-
 ⭐ **다양한 인스턴스 유형**
 
+````
 - 범용 인스턴스 : M,T
 
 - 컴퓨팅 최적화 인스턴스 : C
@@ -234,29 +168,32 @@ EC2에서 제공하는 가상 서버로 필요에 맞게 인스턴스 유형 및
 - 스토리지 최적화 인스턴스 : I,D,H
 
 - 가속화된 컴퓨팅 인스턴스 : P,G,D,F,V
+````
 
-  
 
 ⭐ **인스턴스 사이즈**
 
+````
 [nano < micro < small < medium < large < xlarge < 2xlarge]
 
 →  CPU와 메모리 등 사이즈가 클 수록 늘어나고 성능이 빨라진다.
+````
 
-  
 
 ⭐ **인스턴스 타입**
 
+````
 Ex) m5a.xlarge
 
 m: 인스턴스 유형
 5: 세대
 a: 인스턴스 속성
 xlarge: 인스턴스 사이즈
-
+````
 
 ⭐ **인스턴스 속성**
 
+````
 a: AMD 프로세서
 g: AWS Gravition 프로세서 (AWS CPU)
 i: 인텔 프로세서
