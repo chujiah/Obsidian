@@ -127,11 +127,7 @@ Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
 
 ![](https://i.imgur.com/GgPqFRC.png)
 
-````
-❓
-
 Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS 및 소프트웨어 등 세팅 정보를 저장한 단위
-````
 
 💡 ***스냅샷과 AMI의 차이는?***
 
@@ -206,51 +202,35 @@ z: 고주파
 
 ### 🔍 3. Key pair
 
-![](https://i.imgur.com/mkpULvS.png)
-
-````
-❓
-
 인스턴스 접속을 위한 물리키로 외부에서 EC2를 접속할 때 필요한 키페어
 재발급이 불가하기 때문에 잘 저장해야 함!
-````
+
+![](https://i.imgur.com/mkpULvS.png)
 
 ### 🔍 4. 보안 그룹
-
-![](https://i.imgur.com/e4VGioq.png)
-![](https://i.imgur.com/Ua0ptFt.png)
-
-
-````
-❓
 
 네트워크를 통해 인스턴스의 접속 허용 범위를 설정
 
 SSH 접속 22번 포트 사용 0.0.0.0/0 (모든 ip) 접속 가능
 HTTP 접속 80 포트 사용 0.0.0.0/0 (모든 ip) 접속 가능
-````
+
+![](https://i.imgur.com/e4VGioq.png)
+![](https://i.imgur.com/Ua0ptFt.png)
 
 ### 🔍 5. EBS
-
-![](https://i.imgur.com/qBFCJnu.png)
-
-````
-❓
 
 Elastic Block Storage, 클라우드 가상 하드디스크
 
 EC2가 종료되어도 별개로 작동하여 유지 가능!
 하나의 EBS에 여러 EC2, 하나의 EC2에 여러 EBS 가능!
-````
+
+![](https://i.imgur.com/qBFCJnu.png)
 
 ⬛ ***EBS 볼륨
 
-````
-❓
-
 EBS로 생성한 디스크 저장 단위
 (Ex. C드라이브, D드라이브)
-````
+
 
 ⬛ ***EBS 볼륨 유형
 
@@ -276,27 +256,19 @@ IOPS 수치가 높을수록 데이터 통신이 빠름
 
 # 📎 탄력적 IP
 
-````
-❓
-
 Elastic IP,
 인터넷을 통해 접속이 가능한 공인 IP 주소 할당
-인스턴스의 public IP가 고정된 IP 주소가 아니기 때문에 인스턴스를 중지하고 실행할 시 IP주소가 변경되어 버림! 
-그래서 고정적인 IP 주소를 위해 탄력적 IP 할당 
-````
+**인스턴스의 public IP가 고정된 IP 주소가 아니기 때문에 인스턴스를 중지하고 실행할 시 IP주소가 변경되어 버림!** 
+**그래서 고정적인 IP 주소를 위해 탄력적 IP 할당** 
 
 ![](https://i.imgur.com/0mr77Wb.png)
 
 # 📎 NAT Gateway
 
-````
-❓
-
 Network Address Translation (네트워크 주소 변환),
 사설 IP를 하나의 공인 IP로 변경하여 외부에 인터넷 통신이 가능하도록 만드는 것
 
 private 서브넷이 내부에서 외부로 통신 (아웃바운드) 할 수 있도록 public 서브넷에 추가하여 private 서브넷의 라우팅을 추가해줌
-````
 
 ![](https://i.imgur.com/nudhD2v.png)
 
@@ -315,12 +287,9 @@ Bastion Host도 NAT Gateway와 마찬가지로 public 서브넷에 위치함
 
 # 📎 EKS
 
-````
-❓ 
-
 Amazon Elastic Kubernetes Service,
 AWS에서 제공하는 kubernetes 관리형 실행 서비스
-````
+
 
 
 
