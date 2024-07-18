@@ -1,54 +1,28 @@
-## Redis
-
-  
+# Redis
 
 Remote Dictionary Server 의 약자로 key-value 형태의 데이터 구조 저장소
 
-  
-
-![출처:[https://medium.com/frientrip/pub-sub-잘-알고-쓰자-de9dc1b9f739](https://medium.com/frientrip/pub-sub-%EC%9E%98-%EC%95%8C%EA%B3%A0-%EC%93%B0%EC%9E%90-de9dc1b9f739)](Kafka%20&%20Redis%208fa1fc47d8e34d3c8976d0d3639e2b22/Untitled%204.png)
-
-  
-
+![](https://i.imgur.com/qLOzsIo.png)
 출처:[https://medium.com/frientrip/pub-sub-잘-알고-쓰자-de9dc1b9f739](https://medium.com/frientrip/pub-sub-%EC%9E%98-%EC%95%8C%EA%B3%A0-%EC%93%B0%EC%9E%90-de9dc1b9f739)
 
-  
+### Redis를 직접 사용해보자 !! ✨
 
-### 💡Redis를 직접 사용해보자 !!
+🙋‍♀️ 테스트를 하기 위해서는 Redis를 해당 서버에 설치 및 설정해야 함!
 
-  
-
-- 🙋‍♀️ 테스트를 하기 위해서는 Redis를 해당 서버에 설치 및 설정해야 함!
-
-    ** 윈도우 환경
-
+-   msi 확장자 redis 설치 (port 정보는 application.yml에서 설정할 번호)
     [https://github.com/microsoftarchive/redis/releases](https://github.com/microsoftarchive/redis/releases)
 
-    msi 확장자 redis 설치 (port 정보는 application.yml에서 설정할 번호)
 
-  
-
-```
-
-**Spring boot 3.2.5
-
-jdk 17**
+◼ 버전 정보 및 Redis 의존성 설정
 
 ```
-
-  
+Spring boot 3.2.5
+jdk 17
+```
 
 ```groovy
-
 implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
 ```
-
-  
-
-⇒ Redis 의존성 추가
-
-  
 
 ```yaml
 
@@ -70,15 +44,8 @@ spring:
 
 ```
 
-  
 
-📎 Config 설정
-
-  
-
-⇒ yml에 정의했던 Redis의 host, port 정보를 가져와 connection 설정 및 데이터 직렬화
-
-  
+◼ Config 설정 
 
 ```java
 
@@ -168,11 +135,14 @@ public class RedisConfig {
 
 ```
 
+````
+📎
+
+yml에 정의했던 Redis의 host, port 정보를 가져와 connection 설정 및 데이터 직렬화
+````
   
 
-📎 값을 넘길 DTO 생성
-
-  
+◼ 값을 넘길 DTO 생성
 
 ```java
 
@@ -196,15 +166,8 @@ public class RedisDto {
 
 ```
 
-  
 
-📎 컨트롤러 생성
-
-  
-
-⇒ 레디스에 값을 등록/수정 , 조회, 삭제 로직 생성
-
-  
+◼ 컨트롤러 생성
 
 ```java
 
@@ -282,58 +245,53 @@ public class RedisController {
 
 ```
 
+````
+📎
+
+레디스에 값을 등록/수정 , 조회, 삭제 로직 생성
+````
+
+💡 RestTemplate 메서드
+
+| 메소드명          | 반환 오퍼레이션        | 자료구조       |
+| ------------- | --------------- | ---------- |
+| opsForValue() | ValueOperations | String     |
+| opsForList()  | ListOperations  | List       |
+| opsForSet()   | SetOperations   | Set        |
+| opsForZSet()  | ZSetOperations  | Sorted Set |
+| opsForHash()  | HashOperations  | Hash       |
+
+### TEST
+
+
+![](https://i.imgur.com/s6ONOW9.png)
+
+````
+📎
+
+hello 키에 값 저장
+````
   
+![](https://i.imgur.com/sXLQ1IX.png)
 
-RestTemplate 메서드
+````
+📎
 
-  
+hello 키로 조회 후 값 확인
+````
 
-| 메소드명 | 반환 오퍼레이션 | 자료구조 |
+![](https://i.imgur.com/Dgt9F9Y.png)
 
-| --- | --- | --- |
+````
+📎
 
-| opsForValue() | ValueOperations | String |
+hello 키 삭제
+````
 
-| opsForList() | ListOperations | List |
+![](https://i.imgur.com/A6kZH0S.png)
 
-| opsForSet() | SetOperations | Set |
+````
+📎
 
-| opsForZSet() | ZSetOperations | Sorted Set |
-
-| opsForHash() | HashOperations | Hash |
-
-  
-
-:: TEST
-
-  
-
-![Untitled](Kafka%20&%20Redis%208fa1fc47d8e34d3c8976d0d3639e2b22/Untitled%205.png)
-
-  
-
-⇒ hello 키에 값 저장
-
-  
-
-![Untitled](Kafka%20&%20Redis%208fa1fc47d8e34d3c8976d0d3639e2b22/Untitled%206.png)
-
-  
-
-⇒ hello 키로 조회 후 값 확인
-
-  
-
-![Untitled](Kafka%20&%20Redis%208fa1fc47d8e34d3c8976d0d3639e2b22/Untitled%207.png)
-
-  
-
-⇒ hello 키 삭제
-
-  
-
-![Untitled](Kafka%20&%20Redis%208fa1fc47d8e34d3c8976d0d3639e2b22/Untitled%208.png)
-
-  
-
-⇒ 조회하여 삭제 된 것을 확인
+조회하여 삭제된 것을 확인
+````
