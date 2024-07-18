@@ -10,14 +10,15 @@
 👭 IAM 계정 
 - (AWS Identity and Access Management), Root 계정의 보안을 위해 IAM을 통해 인증 및 권한을 부여하여 사용
 
-**IAM Identity Center 사용자**
+**IAM Identity Center 사용자** <br>
   - IAM Identity Center를 통해 생성되고 관리되는 사용자
   - 중앙 집중식 인증 및 권한 부여를 제공하며, 여러 AWS 계정 및 애플리케이션에 걸쳐 SSO 기능 제공
 
-**IAM 기본 사용자** 
+**IAM 기본 사용자** <br>
    - AWS 계정 내의 직접 생성되고 관리되는 사용자
    - AWS 리소스에 대한 액세스 관리
 <br>
+
 **SSO(Single Sign-On)** 은 사용자가 한번의 로그인으로 여러 시스템이나 애플리케이션에 접근할 수 있게 해주는 인증 방법
 
 # **VPC (Virtual Private Cloud)**
@@ -292,6 +293,65 @@ NAT Gateway는 내부 -> 외부 접근이 가능하다면 Bastion Host는 내부
 Bastion Host도 NAT Gateway와 마찬가지로 public 서브넷에 위치함
 ````
 
+
+# ECR
+
+Amazon Elastic Container Registry, AWS에서 제공하는 Docker 컨테이너 레지스트리 서비스 <br>
+ECR을 사용하여 컨테이너 이미지를 저장, 관리, 배포 가능
+
+### ECR 구성요소
+
+◼ Registry
+
+컨테이너 이미지를 저장하는 장소 
+
+◼ Repository
+
+Registry에 특정 애플리케이션의 이미지를 저장하는 그룹
+
+````
+Public Repository : 인터넷에 연결된 모든 사용자가 해당 Repository에 저장된 이미지를 접근 및 다운 가능 
+Private Repository : 접근 권한이 부여된 사용자만 접근 및 다운 가능
+````
+
+◼ Image
+
+애플리케이션 코드, 라이브러리, 환경 변수, 설정 파일 등을 포함한 컨테이너화된 애플리케이션, <br>
+각 이미지엔 특정 태그를 가지며 버전관리가 가능
+
+◼ Image Tag
+
+특정 이미지를 식별하기 위한 문자열
+
+![](https://i.imgur.com/JB1VMm3.png)
+
+````
+📎 
+
+Repository 이름 입력 후 생성
+````
+
+### Docker 이미지 생성 및 푸시
+
+```
+## 1. Registry 인증
+aws ecr get-login-password --region [Region] | docker login --username AWS --password-stdin [인증 계정]
+
+## 2. 프로젝트 빌드
+
+## 3. jar 파일이 있는 위치로 이동
+cd build/libs
+
+## 4. 도커에 빌드
+docker build -t jachu
+
+## 5. 이미지 태그 설정
+docker tag jachu:latest [인증 계정]/jachu:latest 
+
+## 6. 해당 Repository에 Push
+docker push [인증 계정]/jachu:latest
+```
+
 # EKS
 
 Amazon Elastic Kubernetes Service, AWS에서 제공하는 kubernetes 관리형 실행 서비스
@@ -301,7 +361,6 @@ Amazon Elastic Kubernetes Service, AWS에서 제공하는 kubernetes 관리형 �
 1. EKS는 Kubernetes 클러스터의 Master Node를 관리
 2. 다양한 서비스와 통합되어 있어 ELB, IAM 등을 통한 로드밸런싱, 권한관리 등이 가능
 3. Kubernetes의 최신 버전 및 보안 패치를 자동으로 적용
-
 
 
 
