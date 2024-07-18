@@ -382,4 +382,3 @@ private 서브넷에 인스턴스를 만들거기 때문에 각 가용영역의 
 💡 **ENI 란?**
 
 Elastic Network Interface, AWS 가상 네트워킹 컴포넌트로 VPC 내에서 사용할 수 있는 네트워크 인터페이스로EC2 인스턴스와 연결하여 네트워킹 가능
-
