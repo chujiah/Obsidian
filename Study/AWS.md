@@ -362,7 +362,24 @@ Amazon Elastic Kubernetes Service, AWS에서 제공하는 kubernetes 관리형 �
 2. 다양한 서비스와 통합되어 있어 ELB, IAM 등을 통한 로드밸런싱, 권한관리 등이 가능
 3. Kubernetes의 최신 버전 및 보안 패치를 자동으로 적용
 
+![](https://i.imgur.com/eXmIApw.png)
 
+````
+📎 
 
+클러스터 이름 입력 후 생성
+````
 
+![](https://i.imgur.com/jmucIBo.png)
+
+````
+📎 
+
+VPC 선택후 ENI를 배치할 서브넷을 선택
+private 서브넷에 인스턴스를 만들거기 때문에 각 가용영역의 프라이빗 서브넷으로 선택
+````
+
+💡 **ENI 란?**
+
+Elastic Network Interface, AWS 가상 네트워킹 컴포넌트로 VPC 내에서 사용할 수 있는 네트워크 인터페이스로EC2 인스턴스와 연결하여 네트워킹 가능
 
