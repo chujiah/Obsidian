@@ -1,6 +1,6 @@
 # AWS
 
-![](https://i.imgur.com/CwAMqZh.png)
+
 
 # **계정 생성**
 
@@ -26,16 +26,6 @@
 클라우드 환경 AWS 계정 사용자 전용의 가상 네트워크,
 서브넷,라우팅 테이블 등 네트워킹 환경을 사용자가 구성 및 제어 가능
 
-
-![](https://i.imgur.com/Y5bWfxH.png)
-
-
-````
-📎
-
-이름 태그 (jachu-vpc) / IPv4 CIDR (10.0.0.0/16) 입력 후 생성
-````
-
 # 서브넷
 
 
@@ -46,78 +36,25 @@
 - **프라이빗 서브넷** : 외부 인터넷과 <mark>통신이 불가능</mark>한 서브넷 (ex. 데이터베이스 서버) [아웃바운드]
 
 
-
-![](https://i.imgur.com/NtCtqOR.png)
-
-
-![](https://i.imgur.com/1Encb0k.png)
-
-  
-````
-
-📎 
-
-각각의 가용영역( ap-northeast-2a / ap-northeast-2c)에 Public / Private 서브넷 생성 (가용영역 2개일 시)
-
-네트워크 더 작은 네트워크 단위로 분할하기 위해 10.0.0.0/16 네트워크를 여러개의  10.0.1.0/24, 10.0.2.0/24, 10.0.3.0/24, 10.0.4.0/24 의 서브넷으로 나눔
-
-  
-퍼블릭 서브넷일 경우엔 IPv4 주소 자동 할당 활성화 필수
-````
-
 ⭐ **가용 영역 (AZ, Availablity Zone)**
 
 이중화와 비슷한 개념으로 AWS 리전 내에서 물리적으로 분리하여 장애 복구 및 지속적인 가용성을 보장
 
-| AZ              | 서브넷                      | IPv4 CIDR                                     |
-| --------------- | ------------------------ | --------------------------------------------- |
-| ap-northeast-2a | jachu-subnet-public-az1  | 10.0.1.0/24                                   |
-| ap-northeast-2a | jachu-subnet-private-az1 | 10.0.3.0/24                                   |
-| ap-northeast-2c | jachu-subnet-public-az2  | 10.0.2.0/24                                   |
-| ap-northeast-2c | jachu-subnet-private-az2 | 10.0.4.0/24                                   |
+| AZ              | 서브넷 (ex)                 | IPv4 CIDR   |
+| --------------- | ------------------------ | ----------- |
+| ap-northeast-2a | jachu-subnet-public-az1  | 10.0.1.0/24 |
+| ap-northeast-2a | jachu-subnet-private-az1 | 10.0.3.0/24 |
+| ap-northeast-2c | jachu-subnet-public-az2  | 10.0.2.0/24 |
+| ap-northeast-2c | jachu-subnet-private-az2 | 10.0.4.0/24 |
 
 # 라우팅 테이블
 
  VPC 내의 네트워크 트래픽의 경로를 정의
 
-![](https://i.imgur.com/2u9Gp95.png)
-
-````
-📎 
-
-생성한 VPC를 선택하여 public 라우팅 테이블 생성 (ex. jachu-public-rtb)
-````
-
-
-![](https://i.imgur.com/ZfxEnvj.png)
-
-![](https://i.imgur.com/9Pa5VFa.png)
-
-````
-📎 
-
-라우팅 편집을 클릭하여 추가
-
-0.0.0.0/0 은 10.0.0.0/16 대역을 제외한 모든 대역은 인터넷게이트웨이를 통해 바깥으로 내보내줌
-
-반대로 10.0.0.0/16 대역은 로컬에서 찾음
-````
-
-⭐ **인터넷게이트웨이**
+# 인터넷게이트웨이
 
 VPC를 인터넷에 연결하는 가상 라우터, <br>
 퍼블릭 서브넷에 있는 인스턴스가 인터넷으로 나가거나 들어오는 트래픽 처리
-
-![](https://i.imgur.com/yDhEEY4.png)
-
-
-````
-📎 
-
-퍼블릭 라우팅 테이블을 클릭 하여 서브넷 연결 편집을 눌러 퍼블릭 서브넷을 연결
-
-퍼블릭 서브넷은 위에 쓴 것과 같이 외부 인터넷과 통신이 가능한 서브넷이기 때문에 인터넷게이트웨이가 추가된 라우팅 테이블에 연결해야 함
-````
 
 # EC2
 
@@ -125,8 +62,6 @@ Amazon Elastic Cloud , AWS가 제공하는 클라우드 컴퓨팅
 ### 🔍 1. AMI
 
 Amazon Machine Image, EC2 인스턴트를 실행하기 위해 OS 및 소프트웨어 등 세팅 정보를 저장한 단위
-
-![](https://i.imgur.com/GgPqFRC.png)
 
 💡 ***스냅샷과 AMI의 차이는?***
 
@@ -140,8 +75,6 @@ AMI의 경우는 Root Volume을 포함하여 EC2에 연결되어 있는 모든 E
 ````
 
 ### 🔍 2. Instance Types
-
-![](https://i.imgur.com/PbBl4bd.png)
 
 ![](https://i.imgur.com/a35iC5u.png)
 
@@ -203,27 +136,12 @@ z: 고주파
 
 인스턴스 접속을 위한 물리키로 외부에서 EC2를 접속할 때 필요한 키페어 <br>
 재발급이 불가하기 때문에 잘 저장해야 함!
-
-![](https://i.imgur.com/mkpULvS.png)
-
 ### 🔍 4. 보안 그룹
 
 네트워크를 통해 인스턴스의 접속 허용 범위를 설정
-
-![](https://i.imgur.com/e4VGioq.png)
-![](https://i.imgur.com/Ua0ptFt.png)
-
-````
-📎
-
-SSH 접속 22번 포트 사용 0.0.0.0/0 (모든 ip) 접속 가능
-HTTP 접속 80 포트 사용 0.0.0.0/0 (모든 ip) 접속 가능
-````
 ### 🔍 5. EBS
 
 Elastic Block Storage, 클라우드 가상 하드디스크
-
-![](https://i.imgur.com/qBFCJnu.png)
 
 ````
 📎
@@ -236,7 +154,6 @@ EC2가 종료되어도 별개로 작동하여 유지 가능!
 
 EBS로 생성한 디스크 저장 단위
 (Ex. C드라이브, D드라이브)
-
 
 ⬛ **EBS 볼륨 유형**
 
@@ -264,8 +181,6 @@ IOPS 수치가 높을수록 데이터 통신이 빠름
 
 Elastic IP, 인터넷을 통해 접속이 가능한 공인 IP 주소 할당
 
-![](https://i.imgur.com/0mr77Wb.png)
-
 ````
 📎
 
@@ -276,23 +191,12 @@ Elastic IP, 인터넷을 통해 접속이 가능한 공인 IP 주소 할당
 Network Address Translation (네트워크 주소 변환), <br>
 사설 IP를 하나의 공인 IP로 변경하여 외부에 인터넷 통신이 가능하도록 만드는 것
 
-![](https://i.imgur.com/nudhD2v.png)
-
-````
-📎 
-
-private 서브넷이 내부에서 외부로 통신 (아웃바운드) 할 수 있도록 public 서브넷에 추가하여 private 서브넷의 라우팅을 추가해줌
-
-NAT 게이트웨이에 탄력적IP 주소 할당하여 공인 IP를 가지도록 함
-````
-
 💡 ***Bastion host와 NAT Gateway***
 
 ```` 
 NAT Gateway는 내부 -> 외부 접근이 가능하다면 Bastion Host는 내부 <-> 외부 접근이 가능함
 Bastion Host도 NAT Gateway와 마찬가지로 public 서브넷에 위치함
 ````
-
 
 # ECR
 
@@ -322,36 +226,6 @@ Private Repository : 접근 권한이 부여된 사용자만 접근 및 다운 �
 ◼ Image Tag
 
 특정 이미지를 식별하기 위한 문자열
-
-![](https://i.imgur.com/JB1VMm3.png)
-
-````
-📎 
-
-Repository 이름 입력 후 생성
-````
-
-### Docker 이미지 생성 및 푸시
-
-```
-## 1. Registry 인증
-aws ecr get-login-password --region [Region] | docker login --username AWS --password-stdin [인증 계정]
-
-## 2. 프로젝트 빌드
-
-## 3. jar 파일이 있는 위치로 이동
-cd build/libs
-
-## 4. 도커에 빌드
-docker build -t jachu
-
-## 5. 이미지 태그 설정
-docker tag jachu:latest [인증 계정]/jachu:latest 
-
-## 6. 해당 Repository에 Push
-docker push [인증 계정]/jachu:latest
-```
-
 # EKS
 
 Amazon Elastic Kubernetes Service, AWS에서 제공하는 kubernetes 관리형 실행 서비스
@@ -362,27 +236,12 @@ Amazon Elastic Kubernetes Service, AWS에서 제공하는 kubernetes 관리형 �
 2. 다양한 서비스와 통합되어 있어 ELB, IAM 등을 통한 로드밸런싱, 권한관리 등이 가능
 3. Kubernetes의 최신 버전 및 보안 패치를 자동으로 적용
 
-![](https://i.imgur.com/eXmIApw.png)
-
-````
-📎 
-
-클러스터 이름 입력 후 생성
-````
-
-![](https://i.imgur.com/jmucIBo.png)
-
-````
-📎 
-
-VPC 선택후 ENI를 배치할 서브넷을 선택
-private 서브넷에 인스턴스를 만들거기 때문에 각 가용영역의 프라이빗 서브넷으로 선택
-````
-
 💡 **ENI 란?**
 
 Elastic Network Interface, AWS 가상 네트워킹 컴포넌트로 VPC 내에서 사용할 수 있는 네트워크 인터페이스로EC2 인스턴스와 연결하여 네트워킹 가능
 
-# ALB
+# Load Balancer
+
+
 
 
