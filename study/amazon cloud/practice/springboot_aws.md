@@ -284,7 +284,7 @@ kubectl describe pod <pod명>
 
 ## 테스트
 
-![](https://i.imgur.com/95E3NsC.png)
+![](https://i.imgur.com/RH1YEmL.png)
 
 ````
 📎 
