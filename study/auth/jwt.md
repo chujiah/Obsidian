@@ -37,4 +37,112 @@ Access Token이 만료되었을 때 Refresh Token 유효기간 동안 재발급�
 
 ### 환경 설정
 
+- build.gradle
+
+![](https://i.imgur.com/GcOmi4K.png)
+
+- application.yml
+
+![](https://i.imgur.com/48JkAnd.png)
+
+````
+📎
+jwt 설정하면서 추가될 예정!
+일단은 기본으로 h2 , jpa 설정을 해줌
+
+* H2 디비 세팅 필수 *
+````
+
+
+## User
+
+````
+로그인 때 필요한 계정을 DB에 저장해주기 위해 User 관련 파일을 생성
+````
+
+### UserEntity
+
+````java
+import jakarta.persistence.*;  
+import lombok.AllArgsConstructor;  
+import lombok.Builder;  
+import lombok.NoArgsConstructor;  
+import org.hibernate.annotations.Comment;  
+  
+@Entity  
+@Builder(toBuilder = true)  
+@NoArgsConstructor  
+@AllArgsConstructor  
+@Table(name = "tb_user")  
+public class UserEntity {  
+  
+@Id  
+@Comment("사용자 아이디")  
+@Column(name="user_id", length = 50)  
+private String userId;  
+  
+@Comment("사용자 비밀번호")  
+@Column(name="user_password", nullable = false, length = 100)  
+private String userPassword;  
+  
+@Comment("사용자 이름")  
+@Column(name = "user_name", nullable = false, length = 100)  
+private String userName;  
+}
+````
+
+````
+📎
+
+사용자 Entity
+
+@Builder(toBuilder = true)  
+=> build()로 객체에 값을 넣어주기 위함
+
+@NoArgsConstructor  
+=> 기본 생성자
+
+@AllArgsConstructor  
+=> 모든 생성자
+````
+
+### UserDto
+
+````java
+import lombok.Getter;  
+import lombok.Setter;  
+  
+@Getter  
+@Setter  
+public class UserDto {  
+private String userId;  
+private String userPassword;  
+}
+````
+
+````
+📎
+
+파라미터를 넘겨주기 위해 dto도 생성
+````
+
+
+### UserRepository
+
+````java
+import org.springframework.data.jpa.repository.JpaRepository;  
+  
+public interface UserRepository extends JpaRepository<UserEntity, String> {  
+}
+````
+
+````
+📎
+
+crud를 위한 repository 생성
+````
+
+## Security
+
+### SecurityUserDetails
 

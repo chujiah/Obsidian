@@ -2,7 +2,7 @@
 
 
 
-# **계정 생성**
+# 계정
 
 🙋‍♀️ Root 계정
 - AWS 계정 내 모든 AWS 서비스 및 리소스에 접근 가능
@@ -242,6 +242,25 @@ Elastic Network Interface, AWS 가상 네트워킹 컴포넌트로 VPC 내에서
 
 # Load Balancer
 
+네트워크 트래픽을 여러 서버에 분산시켜 서버의 부하를 균형있게 유지, 성능 및 가용성을 향상시키는 소프트웨어
 
+## 로드 밸런서 유형
 
+![](https://i.imgur.com/J5dr99u.png)
+
+### ALB (Application LB)
+
+OSI 모델의 7계층인 애플리케이션 계층, HTTP, HTTPS 트래픽을 처리하며 URL 처리 기반 라우팅, 호스트 기반 라우팅 그리고 경로 기반 라우팅을 지원
+### NLB (Network LB)
+
+OSI 모델의 4계층인 전송 계층, TCP, UDP 그리고 TLS 트래픽을 처리
+각 가용영역에 대해 고정 IP 주소를 제공하거나 Elastic IP 할당 가능
+
+### CLB (Classic LB)
+
+OSI 모델의 4계층인 전송 계층과 7계층인 애플리케이션 계층에서 동작, HTTP, HTTPS, TCP, SSL 트래픽을 처리
+
+### GWLB (Gateway LB)
+
+OSI 모델 3계층인 네트워크 계층, 네트워크 트래픽을 관리하고 보호
 
