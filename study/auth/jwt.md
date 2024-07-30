@@ -257,6 +257,122 @@ this.exceptionType = exceptionType;
 JwtException을 상속 받은 JwtErrorException 생성
 위에서 생성한 타입들을 사용하기 위함
 ````
+
+### ResponseException
+
+````java
+import lombok.Builder;  
+import lombok.Getter;  
+  
+import java.time.LocalDateTime;  
+  
+@Builder  
+@Getter  
+public class ResponseException {  
+  
+private LocalDateTime timestamp;  
+private String code;  
+private String status;  
+private String message;  
+  
+}
+````
+
+````
+📎
+
+ExceptionHandler에서 오류에 관한 정보를 보내줄 데이터를 담음
+````
+
+### GlobalExceptionHandler
+
+````java
+import com.example.jwtbase.constant.ExceptionType;  
+import com.example.jwtbase.exception.ResponseException;  
+import com.example.jwtbase.security.JwtErrorException;  
+import io.jsonwebtoken.JwtException;  
+import io.micrometer.common.util.StringUtils;  
+import org.apache.commons.logging.Log;  
+import org.apache.commons.logging.LogFactory;  
+import org.springframework.http.HttpHeaders;  
+import org.springframework.http.HttpStatus;  
+import org.springframework.http.ResponseEntity;  
+import org.springframework.security.access.AccessDeniedException;  
+import org.springframework.security.core.AuthenticationException;  
+import org.springframework.web.bind.annotation.ControllerAdvice;  
+import org.springframework.web.bind.annotation.ExceptionHandler;  
+import org.springframework.web.context.request.WebRequest;  
+import org.springframework.web.servlet.NoHandlerFoundException;  
+  
+import java.time.LocalDateTime;  
+  
+@ControllerAdvice  
+public class GlobalExceptionHandler {  
+  
+private final Log logger_error = LogFactory.getLog("ERROR_LOG");  
+  
+@ExceptionHandler(AccessDeniedException.class)  
+public ResponseEntity<ResponseException> handleAccessDenied(AccessDeniedException ex, WebRequest request) {  
+logger_error.error(ex.getMessage());  
+return handleExceptionInternal(ExceptionType.FORBIDDEN_ACCESS, request);  
+}  
+  
+@ExceptionHandler(AuthenticationException.class)  
+public ResponseEntity<ResponseException> handleAuthentication(AuthenticationException ex, WebRequest request) {  
+logger_error.error(ex.getMessage());  
+return handleExceptionInternal(ExceptionType.UNAUTHORIZED_REQUEST, request);  
+}  
+  
+@ExceptionHandler(JwtException.class)  
+public ResponseEntity<ResponseException> handleJwt(JwtException ex, WebRequest request) {  
+logger_error.error(ex.getMessage());  
+if (ex instanceof JwtErrorException) {  
+return handleExceptionInternal(((JwtErrorException) ex).getExceptionType(), request);  
+}  
+return handleExceptionInternal(ExceptionType.UNAUTHORIZED_REQUEST, request);  
+}  
+  
+@ExceptionHandler(NoHandlerFoundException.class)  
+public ResponseEntity<ResponseException> handleJwt(NoHandlerFoundException ex, WebRequest request) {  
+logger_error.error(ex.getMessage());  
+return handleExceptionInternal(ExceptionType.NOT_FOUND, request);  
+}  
+  
+@ExceptionHandler(RuntimeException.class)  
+public ResponseEntity<ResponseException> handleException(Exception ex, WebRequest request) {  
+logger_error.error(ex.getMessage());  
+return handleExceptionInternal(ExceptionType.INTERNAL_SERVER_ERROR, request);  
+}  
+  
+protected ResponseEntity<ResponseException> handleExceptionInternal(ExceptionType exceptionType, WebRequest request) {  
+ResponseException body = ResponseException.builder()  
+.timestamp(LocalDateTime.now())  
+.status(exceptionType.getStatus().toString())  
+.code(exceptionType.name())  
+.message(exceptionType.getMessage())  
+.build();  
+  
+String accept = request.getHeader("Accept");  
+if (StringUtils.isNotBlank(accept) && accept.contains("text/html")) {  
+String redirectUrl = "/error/" + exceptionType.getStatus().value();  
+  
+HttpHeaders headers = new HttpHeaders();  
+headers.add("Location", redirectUrl);  
+return ResponseEntity.status(HttpStatus.FOUND).headers(headers).body(body);  
+}  
+  
+return ResponseEntity.status(exceptionType.getStatus()).body(body);  
+}  
+}
+````
+
+````
+📎
+
+예외 처리 핸들러로 페이지 이동시 에러는 페이지로 이동
+axios, ajax와 같이 api 요청은 에러 내용이 담긴 body 응답
+````
+
 ### SecurityUserDetails
 
 ````java
@@ -743,3 +859,6 @@ handlerExceptionResolver.resolveException
 => 이부분은 따로 ExceptionHandler를 만들기 위함
 아까 만든 ExceptionType에 적힌 메시지들을 사용하기 위해서
 ````
+
+### SecurityConfig
+
