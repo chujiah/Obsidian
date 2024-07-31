@@ -39,18 +39,97 @@ Access Token이 만료되었을 때 Refresh Token 유효기간 동안 재발급�
 
 - build.gradle
 
-![](https://i.imgur.com/GcOmi4K.png)
+````
+plugins {  
+id 'java'  
+id 'org.springframework.boot' version '3.3.2'  
+id 'io.spring.dependency-management' version '1.1.6'  
+}  
+  
+group = 'com.example'  
+version = '0.0.1-SNAPSHOT'  
+  
+java {  
+toolchain {  
+languageVersion = JavaLanguageVersion.of(17)  
+}  
+}  
+  
+configurations {  
+compileOnly {  
+extendsFrom annotationProcessor  
+}  
+}  
+  
+repositories {  
+mavenCentral()  
+}  
+  
+dependencies {  
+implementation 'org.springframework.boot:spring-boot-starter-data-jpa'  
+implementation 'org.springframework.boot:spring-boot-starter-security'  
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'  
+implementation 'org.springframework.boot:spring-boot-starter-web'  
+implementation 'org.springframework.boot:spring-boot-starter-jdbc'  
+implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'  
+implementation 'io.jsonwebtoken:jjwt-api:0.11.5'  
+  
+runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'  
+runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'  
+compileOnly 'org.projectlombok:lombok'  
+developmentOnly 'org.springframework.boot:spring-boot-devtools'  
+runtimeOnly 'com.h2database:h2'  
+annotationProcessor 'org.projectlombok:lombok'  
+testImplementation 'org.springframework.boot:spring-boot-starter-test'  
+testImplementation 'org.springframework.security:spring-security-test'  
+testRuntimeOnly 'org.junit.platform:junit-platform-launcher'  
+}  
+  
+tasks.named('test') {  
+useJUnitPlatform()  
+}
+````
 
 - application.yml
 
-![](https://i.imgur.com/48JkAnd.png)
+````yaml
+server:  
+port: 8080  
+  
+  
+spring:  
+datasource:  
+driver-class-name: org.h2.Driver  
+url: jdbc:h2:tcp://localhost/~/jwtbase  
+username: username  
+password: password  
+  
+jpa:  
+database-platform: org.hibernate.dialect.H2Dialect  
+hibernate:  
+ddl-auto: update  
+properties:  
+hibernate:  
+dialect: org.hibernate.dialect.H2Dialect  
+format_sql: true  
+show_sql: true  
+  
+  
+# jwt  
+jwt:  
+secret: testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest  
+access:  
+expiration: 300  
+cookie-name: Access-Cookie  
+refresh:  
+expiration: 500  
+cookie-name: Refresh-Cookie  
+exclude-path: /login/add
+````
 
 ````
 📎
-jwt 설정하면서 추가될 예정!
-일단은 기본으로 h2 , jpa 설정을 해줌
-
-* H2 디비 세팅 필수 *
+jwt, jpa, h2 관련 설정
 ````
 
 
@@ -369,7 +448,7 @@ return ResponseEntity.status(exceptionType.getStatus()).body(body);
 ````
 📎
 
-예외 처리 핸들러로 페이지 이동시 에러는 페이지로 이동
+예외 처리 핸들러로 페이지 이동시 에러는 에러 페이지로 이동
 axios, ajax와 같이 api 요청은 에러 내용이 담긴 body 응답
 ````
 
@@ -861,4 +940,197 @@ handlerExceptionResolver.resolveException
 ````
 
 ### SecurityConfig
+
+````java 
+import com.example.jwtbase.security.*;  
+import lombok.RequiredArgsConstructor;  
+import org.springframework.beans.factory.annotation.Value;  
+import org.springframework.context.annotation.Bean;  
+import org.springframework.context.annotation.Configuration;  
+import org.springframework.security.authentication.AuthenticationManager;  
+import org.springframework.security.authentication.ProviderManager;  
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;  
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;  
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;  
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;  
+import org.springframework.security.config.http.SessionCreationPolicy;  
+import org.springframework.security.core.session.SessionRegistry;  
+import org.springframework.security.core.session.SessionRegistryImpl;  
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;  
+import org.springframework.security.crypto.password.PasswordEncoder;  
+import org.springframework.security.web.SecurityFilterChain;  
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;  
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;  
+import org.springframework.web.servlet.HandlerExceptionResolver;  
+  
+@Configuration  
+@EnableWebSecurity  
+@RequiredArgsConstructor  
+public class SecurityConfig {  
+  
+private final HandlerExceptionResolver handlerExceptionResolver;  
+private final JwtTokenProvider jwtTokenProvider;  
+private final SecurityUserDetailsService securityUserDetailsService;  
+private final JwtLoginSuccessHandler jwtLoginSuccessHandler;  
+  
+@Value("${jwt.exclude-path}")  
+private String[] EXCLUDE_PATH;  
+    
+@Bean  
+public PasswordEncoder passwordEncoder() {  
+return new BCryptPasswordEncoder();  
+}  
+  
+@Bean  
+public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {  
+httpSecurity  
+.httpBasic(AbstractHttpConfigurer::disable)  
+.csrf(AbstractHttpConfigurer::disable)  
+.formLogin(AbstractHttpConfigurer::disable)  
+.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  
+.headers(headers ->  
+headers.xssProtection(  
+xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)  
+)  
+.contentSecurityPolicy(  
+cps -> cps.policyDirectives("script-src 'self' 'unsafe-inline' 'unsafe-eval'")  
+)  
+.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))  
+  
+.authorizeHttpRequests(authorize -> authorize  
+.requestMatchers(EXCLUDE_PATH).permitAll()  
+.anyRequest().authenticated())  
+  
+.exceptionHandling(exceptionHandler -> exceptionHandler  
+.accessDeniedHandler(((request, response, accessDeniedException) -> handlerExceptionResolver.resolveException(request, response, null, accessDeniedException)))  
+.authenticationEntryPoint(((request, response, authException) -> handlerExceptionResolver.resolveException(request, response, null, authException))))  
+  
+.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);  
+return httpSecurity.build();  
+}  
+  
+@Bean  
+public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {  
+return new JwtAuthenticationFilter(jwtTokenProvider, securityUserDetailsService, this.authenticationManager(), jwtLoginSuccessHandler, handlerExceptionResolver);  
+}  
+  
+@Bean  
+public AuthenticationManager authenticationManager() throws Exception {  
+return new ProviderManager(new JwtAuthenticationProvider(securityUserDetailsService, this.passwordEncoder()));  
+}  
+}
+````
+
+````
+📎
+
+Spring Security 설정 클래스,
+
+passwordEncoder()
+=> 비밀번호 암호화를 위함
+
+SecurityFilterChain()
+=> 보안 설정, httpBasic, csrf, formLogin을 비활성화하여 기본 인증, CSRF 보호, 기본 폼로그인을 사용하지 않도록 설정
+
+SessionCreationPolicy.STATELESS
+: 세션 관리 정책을 `STATELESS`로 설정하여 세션을 생성하지 않도록 설정
+
+XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK
+: XSS 공격이 감지되었을 때 페이지 로드를 차단
+
+policyDirectives
+: XSS 공격 방지를 위해 컨텐츠 보안 정책 설정
+
+frameOptions
+:`sameOrigin`으로 설정하여 동일 출처의 콘텐츠만 프레임에 표시할 수 있도록 설정
+
+authorizeHttpRequests
+: 각 path의 권한 설정
+=> EXCLUDE_PATH는 application.yml에 지정되었음 해당 path는 접근 허용
+
+exceptionHandling
+: 예외처리 핸들러 설정, 접근 권한, 인증이 되지 않을 시 HandlerExceptionResolver으로 예외 핸들러로 넘어가게 설정
+
+addFilterBefore
+: jwt 인증필터는 사용자 인증인 UsernamePasswordAuthenticationFilter 전에 실행하도록 설정
+
+
+jwtAuthenticationFilter 빈 등록 및 JwtAuthenticationProvider을 AuthenticationManager로 커스텀 빈 등록 
+````
+
+## Login
+
+### LoginDto
+
+````java
+import lombok.Getter;  
+  
+@Getter  
+public class LoginDto {  
+
+private String username;  
+private String password;  
+
+}
+````
+
+````
+📎
+
+로그인 시 데이터를 넘길 DTO 생성
+````
+
+### LoginController
+
+````java
+import org.springframework.http.HttpStatus;  
+import org.springframework.http.MediaType;  
+import org.springframework.http.ResponseEntity;  
+import org.springframework.web.bind.annotation.*;  
+  
+@RestController  
+@RequestMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)  
+public class LoginController {  
+  
+@PostMapping  
+public ResponseEntity<?> initLogin(@RequestBody LoginDto loginDto) {  
+return new ResponseEntity<>(HttpStatus.CREATED);  
+}  
+
+@PostMapping(value = "/add")  
+public ResponseEntity<?> test(@RequestBody LoginDto loginDto) {  
+userRepository.save(UserEntity.builder().userId(loginDto.getUsername()).userName("관리자").groupType(GroupType.ADMIN).userPassword(BCrypt.hashpw(loginDto.getPassword(), BCrypt.gensalt())).build());  
+return new ResponseEntity<>(HttpStatus.OK);  
+}
+  
+}
+````
+
+````
+📎
+
+로그인 로직 컨트롤러,
+/add 는 사용자를 추가하기 위한 테스트 컨트롤러이다.
+````
+
+## Postman으로 테스트
+
+![](https://i.imgur.com/hVaLorG.png)
+
+````
+📎
+
+사용자 저장,
+json 형식으로 send
+````
+
+![](https://i.imgur.com/1nmV74q.png)
+
+![](https://i.imgur.com/wgDKiMW.png)
+
+````
+📎
+
+로그인을 해보면 쿠키가 만들어진 것을 확인 가능
+````
 
