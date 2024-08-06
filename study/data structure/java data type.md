@@ -1,4 +1,4 @@
-# Primitive Type (기초형)
+# Primitive Type (기본형)
 
 <mark>실제 값을 담을 수 있는 타입</mark>, 객체가 아닌 값을 저장하며 메모리 사용량이 고정되어 있고 기본 연산을 빠르게 수행 (null 값 없음!)
 
@@ -135,4 +135,52 @@ UTF-8은 유니코드 범위에 따라 가변적으로 2byte로 고정되는 EUC
 # Reference Type (참조형)
 
 실제 값을 저장하는 것이 아닌 <mark>데이터가 저장된 메모리의 `주소 값`을 가지는 자료형</mark>, 객체를 참조하는 변수 타입
+
+````
+💡
+
+기본형과 참조형의 차이
+
+기본 자료형은 Stack에 직접 값을 할당하지만 
+참조 자료형은 Stack에서 Heap의 주소를 참조하고 있고 실제 값은 Heap에 존재한다. 
+````
+
+| 참조 자료형     |                      |
+| ---------- | -------------------- |
+| String     | 문자열 저장 클래스           |
+| ArrayList  | 동적 배열 클래스            |
+| HashMap    | 키-값 쌍 저장 클래스         |
+| HashSet    | 중복이 없는 고유한 요소 저장 클래스 |
+| LinkedList | 연결 리스트 클래스           |
+| Queue      | 큐를 나타내는 인터페이스        |
+| Stack      | 스택을 나타내는 클래스         |
+
+# Wrapper Class
+
+| 기본 자료형  | 래퍼클래스     |
+| ------- | --------- |
+| byte    | Byte      |
+| char    | Character |
+| int     | Integer   |
+| float   | Float     |
+| double  | Double    |
+| boolean | Boolean   |
+| long    | Long      |
+| short   | Short     |
+
+````java
+Integer a = null;
+Integer b = 3; // 박싱
+int c = b // 언박싱
+
+List<int> list1 = new ArrayList<>(); // X 불가
+List<Integer> list2 = new ArrayList<>(); // O 가능
+````
+
+````
+📎
+
+래퍼 클래스 경우에는 ==이 아닌 equals()을 사용하며 null 초기화가 가능하다.
+산술연산은 불가능하여 제네릭 타입 내에서 사용이 가능하다.
+````
 
