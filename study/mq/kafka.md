@@ -41,7 +41,7 @@
 
     <mark>docker-compose는 tab을 인식 xx!! 공백 사용ooo</mark>
 
-    ```java
+    ````java
 
     services:
 
@@ -75,7 +75,7 @@
 
           - /var/run/docker.sock:/var/run/docker.sock
 
-    ```
+    ````
 
 ````
 📎 
@@ -118,13 +118,13 @@ Spring boot 3.2.5
 jdk 17
 ```
 
-```groovy
+````groovy
 
 implementation 'org.springframework.kafka:spring-kafka'
 
-```
+````
 
-```yaml
+````yaml
 
 spring:
 
@@ -162,7 +162,7 @@ spring:
 
                 class: org.apache.kafka.common.serialization.StringDeserializer
 
-```
+````
 
 ````
 📎
@@ -174,7 +174,7 @@ yml에 다 지정했기 때문에 따로 config 작업은 필요하지 않음
 
 ◼ Controller 생성
 
-```java
+````java
 
 package com.example.kafkatest.controller;
 
@@ -216,7 +216,7 @@ public class TestController {
 
 }
 
-```
+````
 
 ````
 📎
@@ -227,7 +227,7 @@ public class TestController {
 
 ◼ Consumer 생성
 
-```java
+````java
 
 package com.example.kafkatest.kafka;
 
@@ -255,7 +255,7 @@ public class KafkaConsumer {
 
 }
 
-```
+````
 
 ````
 📎
