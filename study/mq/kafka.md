@@ -41,7 +41,7 @@
 
     <mark>docker-compose는 tab을 인식 xx!! 공백 사용ooo</mark>
 
-    ````java
+````java
 
     services:
 
@@ -75,7 +75,7 @@
 
           - /var/run/docker.sock:/var/run/docker.sock
 
-    ````
+````
 
 ````
 📎 
