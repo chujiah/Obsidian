@@ -1,0 +1,199 @@
+{
+  "main": {
+    "id": "f805ecf09728f254",
+    "type": "split",
+    "children": [
+      {
+        "id": "4e6ec87018d3529b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bb6fb1f3e66af8a1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "study/data structure/linear/queue.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0bcb3811746d4421",
+    "type": "split",
+    "children": [
+      {
+        "id": "17d2a269b7948dd5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f4edf8f84b8b8103",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "adca4f312c66ab7b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e8cb1deb54247435",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ade35227e2e3bf9c",
+    "type": "split",
+    "children": [
+      {
+        "id": "20ced5087181704b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1316f087170d92c2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "study/data structure/linear/queue.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c9370e86bd1436e3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "study/data structure/linear/queue.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3dc9f614e2d7a068",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "92e19b0cffb8f1d1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "study/data structure/linear/queue.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "bb6fb1f3e66af8a1",
+  "lastOpenFiles": [
+    "study/data structure/linear/stack.md",
+    "study/data structure/linear/queue.md",
+    "study/data structure/linear/array.md",
+    "study/data structure/linear/linked list.md",
+    "study/data structure/linear/deque.md",
+    "study/data structure/nonlinear/graph.md",
+    "study/data structure/nonlinear/tree.md",
+    "study/data structure/nonlinear",
+    "study/data structure/linear",
+    "study/data structure/java data type.md",
+    "study/data structure/무제 파일.md",
+    "study/mq/kafka.md",
+    "study/orchestration/kubernetes.md",
+    "study/amazon cloud/practice/springboot_aws.md",
+    "README.md",
+    "study/data structure",
+    "study/amazon cloud/aws.md",
+    "study/auth/jwt.md",
+    "study/mq/redis.md",
+    "study/amazon cloud/vpc.md",
+    "study/amazon cloud/practice",
+    "study/amazon cloud/무제 파일.md",
+    "Pasted image 20240726102726.png",
+    "Pasted image 20240726102247.png",
+    "Pasted image 20240726102057.png",
+    "Pasted image 20240726101927.png",
+    "Pasted image 20240726100709.png",
+    "Pasted image 20240726095939.png",
+    "Pasted image 20240726095517.png",
+    "Pasted image 20240726095343.png",
+    "Pasted image 20240726095457.png",
+    "Pasted image 20240724165825.png",
+    "study/amazon cloud/eks.md",
+    "study/amazon cloud/aws 1.md",
+    "study/mq",
+    "study/orchestration",
+    "study/auth",
+    "study/amazon cloud",
+    "study",
+    "새 폴더",
+    "test/redis.md",
+    "test/kubernetes.md",
+    "test/kafka.md",
+    "test/aws.md",
+    "무제 파일.md",
+    "template/test.md"
+  ]
+}

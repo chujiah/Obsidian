@@ -23,3 +23,4 @@ Stack<Number> st = new Stack<>();
 peek() 와 pop()의 경우 비어있을 경우 Exception이 발생함
 search()의 경우 찾지 못할 경우 -1 반환 , 배열과 달리 위치는 1부터 시작이 된다.
 ````
+
